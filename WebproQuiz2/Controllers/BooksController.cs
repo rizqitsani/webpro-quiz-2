@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -78,6 +78,18 @@ namespace WebproQuiz2.Controllers
                 return NotFound();
             }
             return View(book);
+        }
+
+        // GET: Books/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+
+        // POST: Books/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        {
+            return View("Index", await _context.Book.Where(j => j.BookTitle.Contains(SearchPhrase)).ToListAsync());
         }
 
         // POST: Books/Edit/5
